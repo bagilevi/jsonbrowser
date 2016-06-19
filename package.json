@@ -1,0 +1,47 @@
+{
+  "name": "jsonbrowser",
+  "version": "1.0.0",
+  "description": "JSON Browser",
+  "scripts": {
+    "start": "node server.js",
+    "lint": "eslint src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bagilevi/jsonbrowser.git"
+  },
+  "keywords": [
+    "json"
+  ],
+  "author": "Levente Bagi <levente@bagi.name> (http://github.com/bagilevi)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bagilevi/jsonbrowser/issues"
+  },
+  "homepage": "https://github.com/bagilevi/jsonbrowser",
+  "devDependencies": {
+    "babel-core": "^6.0.20",
+    "babel-eslint": "^4.1.3",
+    "babel-loader": "^6.0.1",
+    "babel-preset-es2015": "^6.0.15",
+    "babel-preset-react": "^6.0.15",
+    "babel-preset-stage-0": "^6.0.15",
+    "eslint": "^1.10.3",
+    "eslint-plugin-react": "^3.6.2",
+    "react-hot-loader": "^1.3.0",
+    "webpack": "^1.12.2",
+    "webpack-dev-server": "^1.12.1"
+  },
+  "dependencies": {
+    "babel-plugin-transform-class-properties": "^6.9.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "jquery": "^2.2.4",
+    "livescript-loader": "^0.1.5",
+    "mobx": "^2.0.2",
+    "mobx-react": "^3.0.1",
+    "prelude-ls": "^1.1.2",
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6",
+    "react-router": "^2.4.1"
+  }
+}
