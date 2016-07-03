@@ -6,6 +6,7 @@ import Column from './Column';
 
 export default class Browser extends Component {
   @observable columns = [];
+  @observable selections = {}
 
   render() {
     let model;
@@ -14,12 +15,7 @@ export default class Browser extends Component {
     } catch (exception) {
       return (<div>Error while parsing JSON: {exception.message}</div>);
     }
-    this.columns = [
-      {
-        key: '0',
-        items: convertToColumnItems(model)
-      }
-    ];
+    this.columns = generateColumnsForSelectedKeys(this.selections, model)
     return (
       <div className="browser">
       {this.columns.map((column, index) => (
@@ -30,6 +26,46 @@ export default class Browser extends Component {
   }
   handleSelectedKey(key) {
 
+  }
+}
+
+const generateColumnsForSelectedKeys = function(selections, model) {
+  var columns = []
+  var iterSelections = selections;
+  var iterModel = model;
+
+  while (iterModel) {
+    if (isScalar(iterModel)) break;
+    var column = {
+      items: convertToColumnItems(iterModel, iterSelections.selectedKey)
+    }
+    columns.push(column);
+    autoInitSelectedKey(iterSelections, iterModel);
+    if (iterSelections.selectedKey === undefined) break;
+    autoInitChildren(iterSelections, iterModel);
+    iterModel = iterModel[iterSelections.selectedKey];
+    iterSelections = iterSelections.children[iterSelections.selectedKey];
+  }
+  return columns;
+}
+
+const autoInitSelectedKey = function(selections, model) {
+  if (selections.selectedKey === undefined) {
+    for (var key in model) {
+      if (!isScalar(model[key])) { // select first key that has a non-scalar value
+        selections.selectedKey = key;
+        return;
+      }
+    }
+  }
+}
+
+const autoInitChildren = function(selections, model) {
+  if (selections.children === undefined) {
+    selections.children = {};
+    for (var key in model) {
+      selections.children[key] = {}
+    }
   }
 }
 
