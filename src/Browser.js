@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import {observable} from 'mobx';
+import {observable,autorun,computed} from 'mobx';
 import {observer} from 'mobx-react';
 
 import Column from './Column';
 
 export default class Browser extends Component {
   @observable columns = [];
-  @observable selections = {}
+  @observable selections = {};
 
   render() {
     let model;
@@ -64,8 +64,10 @@ const autoInitSelectedKey = function(selections, model) {
 const autoInitChildren = function(selections, model) {
   if (selections.children === undefined) {
     selections.children = {};
-    for (var key in model) {
-      selections.children[key] = {}
+  }
+  for (var key in model) {
+    if (selections.children[key] === undefined) {
+      selections.children[key] = {};
     }
   }
 }
@@ -96,9 +98,9 @@ const getType = function (value) {
 }
 
 const getCount = function (value) {
-  if (Array.isArray(value)) {
+  if (isArray(value)) {
     return value.length;
-  } else if (typeof value === 'object') {
+  } else if (isObject(value)) {
     return Object.keys(value).length;
   }
 }
@@ -106,4 +108,12 @@ const getCount = function (value) {
 const isScalar = function (value) {
   const type = getType(value);
   return type != 'object' && type != 'array';
+}
+
+const isArray = function (value) {
+  return Array.isArray(value);
+}
+
+const isObject = function (value) {
+  return (typeof value === 'object') && value !== null
 }
