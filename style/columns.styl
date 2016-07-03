@@ -7,8 +7,15 @@
     padding: 0 2px
     overflow: hidden
     white-space: nowrap
+    > *
+      display: inline-block
+      vertical-align: middle
     .key, .punctuation
-      color: #999
+      color: #666
+      font-size: 90%
+      letter-spacing: 0.25px
+    .punctuation
+      margin-right: 0.25em
     .string-value
       color: #26A
     .false-value
@@ -16,9 +23,19 @@
     .true-value
       color: #2A2
     .null-value
-      color: #988
+      color: #C99
     .number-value
       color: #E61
+    .object-summary, .array-summary
+      font-size: 80%
+      padding: 0 3px
+      border-radius: 3px
+      .number
+        padding: 0 3px
+    .object-summary
+      color: #090
+    .array-summary
+      color: #909
     &.selected
       background: #28C
       color: #FFF

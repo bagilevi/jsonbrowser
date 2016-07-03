@@ -25,7 +25,9 @@ export default class Column extends Component {
               <div className={["column-item", selectedClass].join(' ')} key={index} onClick={this.handleClick.bind(this, item)}>
                 <span className="key">{item.key}</span>
                 <span className="punctuation">: </span>
-                <span className={this.classNameForItem(item)}>{JSON.stringify(item.value)}</span>
+                <span className={this.classNameForItem(item)}>{this.valuify(item)}</span>
+                {this.renderObjectSummary(item)}
+                {this.renderArraySummary(item)}
               </div>
             )
           })
@@ -43,5 +45,18 @@ export default class Column extends Component {
     } else {
       return `${item.type}-value`
     }
+  }
+  renderObjectSummary(item) {
+    if (item.type === 'object') {
+      return <span className="object-summary">{"{"}<span className="number">{item.count}</span>{"}"}</span>
+    }
+  }
+  renderArraySummary(item) {
+    if (item.type === 'array') {
+      return <span className="array-summary">{"["}<span className="number">{item.count}</span>{"]"}</span>
+    }
+  }
+  valuify(item) {
+    return JSON.stringify(item.value);
   }
 }
