@@ -2,14 +2,21 @@ var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
+const production = process.env.WEBPACK_ENV == 'production';
+const development = ! production;
+
+var entry = [
+  './src/index',
+  './style/index'
+]
+if (development) {
+  entry.push('webpack-dev-server/client?http://localhost:4949');
+  entry.push('webpack/hot/only-dev-server');
+}
+
 module.exports = {
   devtool: 'eval',
-  entry: [
-    'webpack-dev-server/client?http://localhost:4949',
-    'webpack/hot/only-dev-server',
-    './src/index',
-    './style/index'
-  ],
+  entry: entry,
   resolve: {
     root: [path.join(__dirname, "src")],
     extensions: ["", ".webpack.js", ".web.js", ".js", ".ls", ".css", ".styl"]
@@ -17,7 +24,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/static/'
+    publicPath: '/'
   },
   plugins: [
     new ExtractTextPlugin("style.css", { allChunks: true }),

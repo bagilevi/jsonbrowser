@@ -1,0 +1,8 @@
+#!/bin/sh
+env WEBPACK_ENV=production webpack --progress -p
+cp -r dist/* ../jsonbrowser-gh-pages/
+cp index.html ../jsonbrowser-gh-pages/
+cd ../jsonbrowser-gh-pages
+git add -A
+git commit -m "release $(date "+%Y-%m-%d %H:%I:%S")"
+git push origin gh-pages
