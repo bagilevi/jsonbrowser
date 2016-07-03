@@ -23,9 +23,9 @@ export default class Column extends Component {
             var selectedClass = (item.selected ? 'selected' : null);
             return (
               <div className={["column-item", selectedClass].join(' ')} key={index} onClick={this.handleClick.bind(this, item)}>
-                <span>{item.key}</span>
-                <span>: </span>
-                <span>{item.value}</span>
+                <span className="key">{item.key}</span>
+                <span className="punctuation">: </span>
+                <span className={this.classNameForItem(item)}>{JSON.stringify(item.value)}</span>
               </div>
             )
           })
@@ -36,5 +36,12 @@ export default class Column extends Component {
   handleClick(item) {
     this.props.selections.selectedKey = item.key;
     this.props.onChange();
+  }
+  classNameForItem(item) {
+    if (item.type == 'boolean' || item.type === 'null') {
+      return `${JSON.stringify(item.value)}-value`
+    } else {
+      return `${item.type}-value`
+    }
   }
 }
