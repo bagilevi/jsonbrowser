@@ -16,6 +16,7 @@ export default class Browser extends Component {
       return (<div>Error while parsing JSON: {exception.message}</div>);
     }
     this.columns = generateColumnsForSelectedKeys(this.selections, model)
+    console.log(JSON.stringify(this.columns, null, 2));
     return (
       <div className="browser">
       {this.columns.map((column, index) => (
@@ -36,11 +37,11 @@ const generateColumnsForSelectedKeys = function(selections, model) {
 
   while (iterModel) {
     if (isScalar(iterModel)) break;
+    autoInitSelectedKey(iterSelections, iterModel);
     var column = {
       items: convertToColumnItems(iterModel, iterSelections.selectedKey)
     }
     columns.push(column);
-    autoInitSelectedKey(iterSelections, iterModel);
     if (iterSelections.selectedKey === undefined) break;
     autoInitChildren(iterSelections, iterModel);
     iterModel = iterModel[iterSelections.selectedKey];
@@ -69,7 +70,7 @@ const autoInitChildren = function(selections, model) {
   }
 }
 
-const convertToColumnItems = function (json) {
+const convertToColumnItems = function (json, selectedKey) {
   const keys = Object.keys(json);
   return keys.map((key) => {
     const value = json[key];
@@ -77,7 +78,8 @@ const convertToColumnItems = function (json) {
       key: key,
       type: getType(value),
       value: isScalar(value) ? value : undefined,
-      count: getCount(value)
+      count: getCount(value),
+      selected: selectedKey === key
     }
   })
 }
