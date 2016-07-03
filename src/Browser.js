@@ -16,17 +16,16 @@ export default class Browser extends Component {
       return (<div>Error while parsing JSON: {exception.message}</div>);
     }
     this.columns = generateColumnsForSelectedKeys(this.selections, model)
-    console.log(JSON.stringify(this.columns, null, 2));
     return (
       <div className="browser">
       {this.columns.map((column, index) => (
-        <Column key={index} items={column.items} onSelectedKey={this.handleSelectedKey} />
+        <Column key={index} items={column.items} selections={column.selections} onChange={this.handleChange.bind(this)} />
       ))}
       </div>
     )
   }
-  handleSelectedKey(key) {
-
+  handleChange() {
+    this.forceUpdate();
   }
 }
 
@@ -39,7 +38,8 @@ const generateColumnsForSelectedKeys = function(selections, model) {
     if (isScalar(iterModel)) break;
     autoInitSelectedKey(iterSelections, iterModel);
     var column = {
-      items: convertToColumnItems(iterModel, iterSelections.selectedKey)
+      items: convertToColumnItems(iterModel, iterSelections.selectedKey),
+      selections: iterSelections
     }
     columns.push(column);
     if (iterSelections.selectedKey === undefined) break;

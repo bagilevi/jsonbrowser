@@ -11,7 +11,8 @@ import {observer} from 'mobx-react';
           - value
           - count
           - selected
-      - onSelectedKey
+      - selections
+      - onChange
 */
 export default class Column extends Component {
   render() {
@@ -21,7 +22,7 @@ export default class Column extends Component {
           this.props.items.map((item, index) => {
             var selectedClass = (item.selected ? 'selected' : null);
             return (
-              <div className={["column-item", selectedClass].join(' ')} key={index}>
+              <div className={["column-item", selectedClass].join(' ')} key={index} onClick={this.handleClick.bind(this, item)}>
                 <span>{item.key}</span>
                 <span>: </span>
                 <span>{item.value}</span>
@@ -31,5 +32,9 @@ export default class Column extends Component {
         }
       </div>
     )
+  }
+  handleClick(item) {
+    this.props.selections.selectedKey = item.key;
+    this.props.onChange();
   }
 }
