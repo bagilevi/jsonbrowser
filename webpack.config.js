@@ -19,7 +19,7 @@ module.exports = {
   entry: entry,
   resolve: {
     root: [path.join(__dirname, "src")],
-    extensions: ["", ".webpack.js", ".web.js", ".js", ".ls", ".css", ".styl"]
+    extensions: ["", ".webpack.js", ".web.js", ".js", ".ls", ".css", ".sass"]
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -47,8 +47,8 @@ module.exports = {
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
       },
       {
-        test: /\.styl$/,
-        loader: ExtractTextPlugin.extract('stylus-loader', 'css-loader!stylus-loader')
+        test: /\.sass/,
+        loader: ExtractTextPlugin.extract('sass-loader', 'css-loader!sass-loader')
       }
     ]
   }
