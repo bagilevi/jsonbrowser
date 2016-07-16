@@ -1,31 +1,35 @@
 .browser
   display: flex
 .column
-  border-right: solid 1px rgba(0, 0, 0, .25)
+  background: white
+  box-shadow: 0.1em 0 0.2em 0 rgba(0,0,0,0.25)
+  margin-right: 4px
+  overflow: auto
+
   max-width: 30em
   .column-item
-    padding: 0 2px
+    padding: .5em 1em
     overflow: hidden
     white-space: nowrap
+    cursor: pointer
     > *
-      display: inline-block
-      vertical-align: middle
+      line-height: 16px
     .key, .punctuation
-      color: #666
+      color: #00838F
       font-size: 90%
       letter-spacing: 0.25px
     .punctuation
       margin-right: 0.25em
     .string-value
-      color: #26A
+      color: #283593
     .false-value
-      color: #A22
+      color: #C62828
     .true-value
-      color: #2A2
+      color: #2E7D32
     .null-value
-      color: #C99
+      color: #424242
     .number-value
-      color: #E61
+      color: #EF6C00
     .object-summary, .array-summary
       font-size: 80%
       padding: 0 3px
@@ -33,11 +37,12 @@
       .number
         padding: 0 3px
     .object-summary
-      color: #090
+      color: #8BC34A
     .array-summary
-      color: #909
+      color: #00BCD4
     &.selected
-      background: #28C
+      background: #039BE5
       color: #FFF
+
       *
         color: #FFF

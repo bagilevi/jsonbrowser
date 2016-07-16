@@ -5,18 +5,13 @@ import {observer} from 'mobx-react';
 export default class EntryForm extends Component {
   render() {
     return (
-      <form className="entry-form" onSubmit={this.handleSubmit}>
-        <div>
-          <textarea name="json" style={{width: 600, height: 400}}/>
-        </div>
-        <div>
-          <input type="submit"/>
-        </div>
+      <form className="entry-form">
+        <textarea name="json" placeholder="Paste your JSON here" onChange={this.handleSubmit}/>
       </form>
     )
   }
   handleSubmit = (ev) => {
     ev.preventDefault();
-    this.props.onInput(ev.target.elements.namedItem('json').value);
+    this.props.onInput(ev.target.value);
   }
 }

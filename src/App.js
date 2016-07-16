@@ -11,10 +11,16 @@ import Browser from './Browser'
 
   render() {
     return (
-      <div>
-        <h1>JSON Browser</h1>
-        <EntryForm onInput={this.handleInput}/>
-        <Browser json={this.json}/>
+      <div id="main">
+        <div id="entry-pane">
+          <header>
+            <h1>JSON Browser</h1>
+          </header>
+          <EntryForm onInput={this.handleInput}/>
+        </div>
+        <div id="contents">
+          <Browser json={this.json}/>
+        </div>
         {/*<DevTools />*/}
       </div>
     );

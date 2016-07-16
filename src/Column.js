@@ -48,7 +48,7 @@ export default class Column extends Component {
   }
   renderObjectSummary(item) {
     if (item.type === 'object') {
-      return <span className="object-summary">{"{"}<span className="number">{item.count}</span>{"}"}</span>
+      return <span className="object-summary">{"{"}<span className="number">{}</span>{"}"}</span>
     }
   }
   renderArraySummary(item) {
