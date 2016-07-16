@@ -1,4 +1,6 @@
 var fs = require('fs');
+var jsStringEscape = require('js-string-escape');
+
 
 // --- Redis ---
 
@@ -24,7 +26,7 @@ function generateRandomString(length) {
 function insertJsonIntoTemplate(template, jsonString) {
   return template.replace(
     "var jsonDocument;",
-    "var jsonDocument = '" + jsonString + "';"
+    "var jsonDocument = '" + jsStringEscape(jsonString) + "';"
   );
 }
 
