@@ -10,8 +10,8 @@ var entry = [
   './style/index'
 ]
 if (development) {
-  entry.push('webpack-dev-server/client?http://localhost:4949');
-  entry.push('webpack/hot/only-dev-server');
+  // entry.push('webpack-dev-server/client?http://localhost:4949');
+  // entry.push('webpack/hot/only-dev-server');
 }
 
 module.exports = {

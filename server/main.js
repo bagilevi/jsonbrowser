@@ -1,5 +1,4 @@
 var fs = require('fs');
-        var template = fs.readFileSync(__dirname + '/../index.html', 'utf8');
 
 // --- Redis ---
 
@@ -47,7 +46,11 @@ module.exports = function(app) {
         console.log("Redis: " + reply);
         res.status(500, send("Unable to save document."));
       } else {
-        res.redirect("/documents/" + key);
+        if (req.query.return == 'json') {
+          res.send(JSON.stringify({ path: "/documents/" + key }));
+        } else {
+          res.redirect("/documents/" + key);
+        }
       }
     });
   });
@@ -59,6 +62,7 @@ module.exports = function(app) {
         console.log("Redis: " + reply);
         res.status(500).send("Unable to load document.");
       } else if (reply) {
+        var template = fs.readFileSync(__dirname + '/../index.html', 'utf8');
         res.send(insertJsonIntoTemplate(template, reply));
       } else {
         res.status(404).send("Document not found.");
