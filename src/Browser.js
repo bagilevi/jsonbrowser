@@ -13,7 +13,7 @@ export default class Browser extends Component {
     try {
       model = JSON.parse(this.props.json);
     } catch (exception) {
-      return (<div>Error while parsing JSON: {exception.message}</div>);
+      return (<div className="error">Error while parsing JSON: {exception.message}</div>);
     }
     this.columns = generateColumnsForSelectedKeys(this.selections, model)
     return (
