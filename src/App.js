@@ -17,6 +17,10 @@ import Browser from './Browser'
             <h1>JSON Browser</h1>
           </header>
           <EntryForm onInput={this.handleInput}/>
+          <footer>
+            <div>made by: <a href="http://levente.bagi.name/" className="author">Lev</a></div>
+            <div><a href="https://github.com/bagilevi/jsonbrowser">source code</a></div>
+          </footer>
         </div>
         <div id="contents">
           <Browser json={this.json}/>
