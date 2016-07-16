@@ -6,7 +6,7 @@ export default class EntryForm extends Component {
   render() {
     return (
       <form className="entry-form">
-        <textarea name="json" placeholder="Paste your JSON here" onChange={this.handleSubmit}/>
+        <textarea name="json" placeholder="Paste your JSON here" onChange={this.handleSubmit}>{this.props.json}</textarea>
       </form>
     )
   }

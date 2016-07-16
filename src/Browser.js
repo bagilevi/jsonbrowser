@@ -10,19 +10,23 @@ export default class Browser extends Component {
 
   render() {
     let model;
-    try {
-      model = JSON.parse(this.props.json);
-    } catch (exception) {
-      return (<div className="error">Error while parsing JSON: {exception.message}</div>);
+    if (this.props.json) {
+      try {
+        model = JSON.parse(this.props.json);
+      } catch (exception) {
+        return (<div className="error">Error while parsing JSON: {exception.message}</div>);
+      }
+      this.columns = generateColumnsForSelectedKeys(this.selections, model)
+      return (
+        <div className="browser">
+        {this.columns.map((column, index) => (
+          <Column key={index} items={column.items} selections={column.selections} onChange={this.handleChange.bind(this)} />
+        ))}
+        </div>
+      )
+    } else {
+      return <div/>
     }
-    this.columns = generateColumnsForSelectedKeys(this.selections, model)
-    return (
-      <div className="browser">
-      {this.columns.map((column, index) => (
-        <Column key={index} items={column.items} selections={column.selections} onChange={this.handleChange.bind(this)} />
-      ))}
-      </div>
-    )
   }
   handleChange() {
     this.forceUpdate();
